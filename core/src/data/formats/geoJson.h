@@ -2,10 +2,12 @@
 
 #include "data/tileData.h"
 #include "util/json.h"
-
 #include <functional>
 
 namespace Tangram {
+
+class TileTask;
+class MapProjection;
 
 namespace GeoJson {
 
@@ -25,6 +27,8 @@ Feature getFeature(const JsonValue& _in, const Transform& _proj, int32_t _source
 
 Layer getLayer(const JsonValue& _in, const Transform& _proj, int32_t _sourceId);
 
-}
+std::shared_ptr<TileData> parseTile(const TileTask& _task, const MapProjection& _projection, int32_t _sourceId);
 
-}
+} // namespace GeoJson
+
+} // namespace Tangram

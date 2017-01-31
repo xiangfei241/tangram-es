@@ -10,8 +10,10 @@
 namespace Tangram {
 
 class Tile;
+class TileTask;
+class MapProjection;
 
-namespace PbfParser {
+namespace Mvt {
 
     struct Geometry {
         std::vector<Point> coordinates;
@@ -35,17 +37,20 @@ namespace PbfParser {
         int winding = 0;
     };
 
+    enum GeomCmd {
+        moveTo = 1,
+        lineTo = 2,
+        closePath = 7
+    };
+
     Geometry getGeometry(ParserContext& _ctx, protobuf::message _geomIn);
 
     Feature getFeature(ParserContext& _ctx, protobuf::message _featureIn);
 
     Layer getLayer(ParserContext& _ctx, protobuf::message _layerIn);
 
-    enum pbfGeomCmd {
-        moveTo = 1,
-        lineTo = 2,
-        closePath = 7
-    };
-}
+    std::shared_ptr<TileData> parseTile(const TileTask& _task, const MapProjection& _projection, int32_t _sourceId);
 
-}
+} // namespace Mvt
+
+} // namespace Tangram
