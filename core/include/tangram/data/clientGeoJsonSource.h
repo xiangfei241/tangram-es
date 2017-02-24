@@ -5,8 +5,6 @@
 
 #include <mutex>
 
-class Platform;
-
 namespace mapbox {
 namespace util {
 namespace geojsonvt {
@@ -16,6 +14,8 @@ class ProjectedFeature;
 }}}
 
 namespace Tangram {
+
+class Platform;
 
 using GeoJSONVT = mapbox::util::geojsonvt::GeoJSONVT;
 

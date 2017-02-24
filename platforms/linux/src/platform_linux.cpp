@@ -1,21 +1,12 @@
-#include <stdio.h>
-#include <stdarg.h>
-#include <iostream>
-#include <fstream>
-#include <functional>
-#include <string>
-
 #include "platform_linux.h"
 #include "gl/hardware.h"
-
+#include "log.h"
+#include <stdio.h>
+#include <stdarg.h>
 #include <libgen.h>
 #include <unistd.h>
 #include <sys/resource.h>
 #include <sys/syscall.h>
-
-#include "log.h"
-
-#include <regex>
 
 #if defined(PLATFORM_LINUX)
 #include <GLFW/glfw3.h>

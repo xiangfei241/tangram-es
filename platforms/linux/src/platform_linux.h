@@ -3,7 +3,7 @@
 #include "platform.h"
 #include "urlClient.h"
 
-using Tangram::UrlClient;
+namespace Tangram {
 
 class LinuxPlatform : public Platform {
 
@@ -16,7 +16,6 @@ public:
     std::vector<FontSourceHandle> systemFontFallbacksHandle() const override;
     bool startUrlRequest(const std::string& _url, UrlCallback _callback) override;
     void cancelUrlRequest(const std::string& _url) override;
-    void processNetworkQueue();
 
 protected:
 
@@ -24,3 +23,4 @@ protected:
 
 };
 
+} // namespace Tangram
