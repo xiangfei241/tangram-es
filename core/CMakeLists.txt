@@ -95,7 +95,7 @@ group_recursive_sources(src "src")
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(INCBIN_SCRIPT ${PROJECT_SOURCE_DIR}/../scripts/incbin.bat)
 else()
-    set(INCBIN_SCRIPT "bash" ${PROJECT_SOURCE_DIR}/../scripts/incbin.bat)
+    set(INCBIN_SCRIPT "bash" ${PROJECT_SOURCE_DIR}/../scripts/incbin.sh)
 endif()
 
 # add compile shader targets
