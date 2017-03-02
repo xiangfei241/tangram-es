@@ -92,11 +92,11 @@ target_compile_definitions(${CORE_LIBRARY}
 # make groups for xcode
 group_recursive_sources(src "src")
 
-if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+#if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     set(INCBIN_SCRIPT ${PROJECT_SOURCE_DIR}/../scripts/incbin.bat)
-else()
-    set(INCBIN_SCRIPT "bash" ${PROJECT_SOURCE_DIR}/../scripts/incbin.sh)
-endif()
+#else()
+#   set(INCBIN_SCRIPT "bash" ${PROJECT_SOURCE_DIR}/../scripts/incbin.sh)
+#endif()
 
 # add compile shader targets
 file(GLOB_RECURSE SHADER_FILES "${CMAKE_CURRENT_SOURCE_DIR}/shaders/*")
