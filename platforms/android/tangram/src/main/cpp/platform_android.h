@@ -20,6 +20,7 @@ struct MarkerPickResult;
 void featurePickCallback(jobject listener, const Tangram::FeaturePickResult* featurePickResult);
 void markerPickCallback(jobject listener, jobject tangramInstance, const Tangram::MarkerPickResult* markerPickResult);
 void labelPickCallback(jobject listener, const Tangram::LabelPickResult* labelPickResult);
+void sceneUpdateCallback(jobject listener);
 
 std::string resolveScenePath(const char* path);
 
