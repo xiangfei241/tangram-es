@@ -15,12 +15,15 @@ namespace Tangram {
 struct LabelPickResult;
 struct FeaturePickResult;
 struct MarkerPickResult;
+struct SceneUpdateStatus;
 }
 
 void featurePickCallback(jobject listener, const Tangram::FeaturePickResult* featurePickResult);
 void markerPickCallback(jobject listener, jobject tangramInstance, const Tangram::MarkerPickResult* markerPickResult);
 void labelPickCallback(jobject listener, const Tangram::LabelPickResult* labelPickResult);
 void sceneUpdateCallback(jobject listener);
+
+void sceneUpdateCallback(jobject updateStatusCallbackRef, const std::vector<Tangram::SceneUpdateStatus>& sceneUpdateStatus);
 
 std::string resolveScenePath(const char* path);
 

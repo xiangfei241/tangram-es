@@ -64,7 +64,7 @@ struct SceneUpdate {
     SceneUpdate(std::string p, std::string v) : path(p), value(v) {}
 };
 
-enum class SceneUpdateError {
+enum SceneUpdateError {
     path_not_found,
     path_yaml_syntax_error,
     value_yaml_syntax_error,
