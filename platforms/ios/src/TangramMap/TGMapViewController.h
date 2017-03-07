@@ -18,6 +18,7 @@
 #import "TGGeoPolygon.h"
 #import "TGGeoPolyline.h"
 #import "TGSceneUpdate.h"
+#import "TGSceneUpdateStatus.h"
 #import "TGHttpHandler.h"
 #import "TGLabelPickResult.h"
 #import "TGMarker.h"
@@ -260,6 +261,10 @@ NS_ASSUME_NONNULL_END
  @param mapView a pointer to the map view
  */
 - (void)mapViewDidCompleteLoading:(nonnull TGMapViewController *)mapView;
+
+/**
+ */
+- (void)mapView:(nonnull TGMapViewController *)mapView didCompleteSceneUpdatesWithErrors:(NSArray<TGSceneUpdateStatus *> *)updateStatuses;
 @end
 
 NS_ASSUME_NONNULL_BEGIN
