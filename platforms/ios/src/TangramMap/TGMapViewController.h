@@ -263,6 +263,11 @@ NS_ASSUME_NONNULL_END
 - (void)mapViewDidCompleteLoading:(nonnull TGMapViewController *)mapView;
 
 /**
+ Called whenever scene updates have been applied to the scene file.
+ The list of scene update statuses will be emtpy if all updates have been applied successfully.
+
+ @param mapView a pointer to the map view
+ @param updateStatuses the list of scene update error status, empty if all updates were successfull
  */
 - (void)mapView:(nonnull TGMapViewController *)mapView didCompleteSceneUpdatesWithErrors:(NSArray<TGSceneUpdateStatus *> *)updateStatuses;
 @end
