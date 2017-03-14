@@ -82,12 +82,11 @@ void LabelCollider::process(TileID _tileID, float _tileInverseScale, float _tile
 
     // Project tile to NDC (-1 to 1, y-up)
     glm::mat4 mvp{1};
-    // Scale tile to 'fullscreen'
-    mvp[0][0] = tileScale;
-    mvp[1][1] = -tileScale;
+    mvp[0][0] = 1.0f;
+    mvp[1][1] = -1.f;
     // Place tile centered
-    mvp[3][0] = -tileScale * 0.5;
-    mvp[3][1] = tileScale * 0.5;
+    mvp[3][0] = -0.5f;
+    mvp[3][1] = 0.5f;
 
     ViewState viewState {
         nullptr, // mapProjection (unused)
