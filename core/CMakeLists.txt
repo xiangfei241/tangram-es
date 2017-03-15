@@ -47,6 +47,7 @@ set(CORE_INCLUDE_DIRS
   ${DEPS_DIR}/sdf
   ${DEPS_DIR}/SQLiteCpp
   ${DEPS_DIR}/stb
+  ${DEPS_DIR}/miniz
   ${DEPS_DIR}/geojson-vt-cpp/geometry.hpp/include
   ${DEPS_DIR}/geojson-vt-cpp/geojson.hpp/include
   ${DEPS_DIR}/geojson-vt-cpp/include
@@ -68,6 +69,7 @@ set(LINK_LIBRARIES
     alfons
     SQLiteCpp
     sqlite3
+    miniz
     z)
 
 if (UNIX AND NOT APPLE)
