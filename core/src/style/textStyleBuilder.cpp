@@ -202,7 +202,7 @@ bool TextStyleBuilder::handleBoundaryLabel(const Feature& _feat, const DrawRule&
     bool hasLeftLabel = false;
     if (hasLeftSource && !leftText.empty()) {
         leftParams.text = leftText;
-        leftParams.labelOptions.offset.y = 15;
+        leftParams.labelOptions.anchors.anchor = { {LabelProperty::Anchor::top} };
 
         hash_combine(leftParams.labelOptions.repeatGroup, leftText);
 
@@ -212,7 +212,7 @@ bool TextStyleBuilder::handleBoundaryLabel(const Feature& _feat, const DrawRule&
     bool hasRightLabel = false;
     if (hasRightSource && !rightText.empty()) {
         rightParams.text = rightText;
-        rightParams.labelOptions.offset.y = -15;
+        rightParams.labelOptions.anchors.anchor = { {LabelProperty::Anchor::bottom} };
 
         hash_combine(rightParams.labelOptions.repeatGroup, rightText);
 
@@ -634,11 +634,8 @@ TextStyle::Parameters TextStyleBuilder::applyRule(const DrawRule& _rule,
         _rule.get(StyleParamKey::offset, p.labelOptions.offset);
         p.labelOptions.offset *= m_style.pixelScale();
 
-        _rule.get(StyleParamKey::anchor, p.labelOptions.anchors);
-        if (p.labelOptions.anchors.count == 0) {
-            p.labelOptions.anchors.anchor = { {LabelProperty::Anchor::center} };
-            p.labelOptions.anchors.count = 1;
-        }
+        p.labelOptions.anchors.anchor = { {LabelProperty::Anchor::center} };
+        p.labelOptions.anchors.count = 1;
 
         if (_rule.get(StyleParamKey::repeat_distance, repeatDistance)) {
             p.labelOptions.repeatDistance = repeatDistance.value;
