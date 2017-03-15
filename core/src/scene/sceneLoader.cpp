@@ -57,9 +57,9 @@ std::mutex SceneLoader::m_textureMutex;
 
 bool SceneLoader::loadScene(const std::shared_ptr<Platform>& _platform, std::shared_ptr<Scene> _scene, const std::vector<SceneUpdate>& _updates) {
 
-    Importer sceneImporter;
+    Importer sceneImporter(_scene);
 
-    _scene->config() = sceneImporter.applySceneImports(_platform, _scene->path(), _scene->resourceRoot());
+    _scene->config() = sceneImporter.applySceneImports(_platform);
 
     if (_scene->config()) {
 
@@ -599,7 +599,7 @@ std::shared_ptr<Texture> SceneLoader::fetchTexture(const std::shared_ptr<Platfor
             }
 
         } else {
-            auto data = platform->bytesFromFile(url.c_str());
+            auto data = scene->sceneAssets()[url]->readBytesFromAsset(platform);
 
             if (data.size() == 0) {
                 LOGE("Can't load texture resource at url '%s'", url.c_str());
@@ -728,7 +728,7 @@ void loadFontDescription(const std::shared_ptr<Platform>& platform, const Node& 
             scene->pendingFonts--;
         });
     } else {
-        auto data = platform->bytesFromFile(_ft.uri.c_str());
+        auto data = scene->sceneAssets()[_ft.uri.c_str()]->readBytesFromAsset(platform);
 
         if (data.size() == 0) {
             LOGW("Local font at path %s can't be found (%s)", _ft.uri.c_str(), _ft.bundleAlias.c_str());

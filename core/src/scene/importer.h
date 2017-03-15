@@ -11,10 +11,12 @@
 #include <unordered_set>
 #include <vector>
 #include "yaml-cpp/yaml.h"
+#include "scene/scene.h"
 
 namespace Tangram {
 
 class Platform;
+class Asset;
 
 class Importer {
 
@@ -22,9 +24,10 @@ public:
 
     using Node = YAML::Node;
 
+    Importer(std::shared_ptr<Scene> _scene);
+
     // Loads the main scene with deep merging dependent imported scenes.
-    Node applySceneImports(const std::shared_ptr<Platform>& platform, const Url& scenePath,
-            const Url& resourceRoot = Url());
+    Node applySceneImports(const std::shared_ptr<Platform>& platform);
 
 // protected for testing purposes, else could be private
 protected:
@@ -44,12 +47,16 @@ protected:
     void mergeMapFields(Node& target, const Node& import);
 
     void resolveSceneUrls(const std::shared_ptr<Platform>& platform, Node& root, const Url& base);
+    const std::unique_ptr<Asset>& createSceneAsset(const Url& resolvedUrl, const Url& relativeUrl, const Url& base,
+            const std::vector<char>& zipData = {});
 
 private:
     // import scene to respective root nodes
     std::unordered_map<Url, Node> m_scenes;
 
     std::vector<Url> m_sceneQueue;
+    std::shared_ptr<Scene> m_scene;
+
     static std::atomic_uint progressCounter;
     std::mutex sceneMutex;
     std::condition_variable m_condition;
