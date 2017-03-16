@@ -22,25 +22,35 @@ struct ZipHandle {
 
 class Asset {
     public:
-        Asset(std::string name, std::string path = "", std::vector<char> zippedData = {},
-                std::shared_ptr<ZipHandle> zipHandle = nullptr);
+        Asset(std::string name, std::string path, std::shared_ptr<ZipHandle> zipHandle = nullptr,
+                std::vector<char> zippedData = {});
         ~Asset();
 
         const std::shared_ptr<ZipHandle> zipHandle() const { return m_zipHandle; }
         const std::string& name() const { return m_name; }
         const std::string& path() const { return m_path; }
 
-        // returns the string from file or from zip archive
+        // builds zipHandle (if not already built, from raw Data
+        void buildZipHandle(const std::vector<char>& zippedData);
+
+        // returns the string from file (m_path) or from zip archive
         std::string readStringFromAsset(const std::shared_ptr<Platform>& platform);
-        // returns the bytes from file or from zip archive
+
+        // returns the bytes from file (m_path) or from zip archive
         std::vector<char> readBytesFromAsset(const std::shared_ptr<Platform>& platform);
 
-        //bool operator==(const Asset& rhs) const;
+        // returns the string from file (m_path) or from zip archive
+        std::string readStringFromAsset(const std::shared_ptr<Platform>& platform, const std::string& filename);
+
+        // returns the bytes from file (m_path) or from zip archive
+        std::vector<char> readBytesFromAsset(const std::shared_ptr<Platform>& platform, const std::string& filename);
 
     private:
         std::string m_name; //resolvedUrl
         std::string m_path; //path within a zip, empty for a non zipped asset
         std::shared_ptr<ZipHandle> m_zipHandle = nullptr; // handle to the zip archive
+
+        bool isBaseYaml(const std::string& filename);
 };
 
 }

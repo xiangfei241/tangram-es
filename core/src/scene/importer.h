@@ -34,11 +34,11 @@ protected:
     virtual std::string getSceneString(const std::shared_ptr<Platform>& platform,
             const Url& scenePath);
 
-    void processScene(const Url& scenePath, const std::string& sceneString);
+    void processScene(const std::shared_ptr<Platform>& platform, const Url& scenePath, const std::string& sceneString);
 
     // Get the sequence of scene names that are designated to be imported into the
     // input scene node by its 'import' fields.
-    std::vector<Url> getResolvedImportUrls(const Node& scene, const Url& base);
+    std::vector<Url> getResolvedImportUrls(const std::shared_ptr<Platform>& platform, const Node& scene, const Url& base);
 
     // loads all the imported scenes and the master scene and returns a unified YAML root node.
     void importScenesRecursive(const std::shared_ptr<Platform>& platform, Node& root,
@@ -47,8 +47,8 @@ protected:
     void mergeMapFields(Node& target, const Node& import);
 
     void resolveSceneUrls(const std::shared_ptr<Platform>& platform, Node& root, const Url& base);
-    const std::unique_ptr<Asset>& createSceneAsset(const Url& resolvedUrl, const Url& relativeUrl, const Url& base,
-            const std::vector<char>& zipData = {});
+    void createSceneAsset(const std::shared_ptr<Platform>& platform, const Url& resolvedUrl,
+            const Url& relativeUrl, const Url& base);
 
 private:
     // import scene to respective root nodes
